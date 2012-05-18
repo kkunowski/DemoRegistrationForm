@@ -67,14 +67,14 @@
 
 +(BOOL)validatePassword:(RegistrationDataModel *)model 
 {
-    if(model.password == NULL || model.confirmedPassword == NULL || model.firstName == NULL || model.lastName == NULL)
+    if(model.password == NULL || model.confirmedPassword == NULL || model.firstName == NULL || model.lastName == NULL || model.registrationNumber == NULL || model.idNumber == NULL)
         return FALSE;
     
-    if(model.password.length == 0 || model.confirmedPassword.length == 0 || model.lastName.length == 0 || model.firstName.length == 0)
+    if(model.password.length == 0 || model.confirmedPassword.length == 0 || model.lastName.length == 0 || model.firstName.length == 0 || model.registrationNumber.length == 0 || model.idNumber.length == 0)
         return FALSE;
 
     BOOL passwordSecure = FALSE;
-    if(![RegistrationValidator string:model.password contains:model.firstName] && ![RegistrationValidator string:model.password contains:model.lastName] && [RegistrationValidator hasSpecialCharacter:model.password])
+    if(![RegistrationValidator string:model.password contains:model.firstName] && ![RegistrationValidator string:model.password contains:model.lastName] && ![RegistrationValidator string:model.password contains:model.registrationNumber] && ![RegistrationValidator string:model.password contains:model.idNumber] && [RegistrationValidator hasSpecialCharacter:model.password])
         passwordSecure = TRUE;
     
     BOOL passwordsEquals = [model.password isEqualToString:model.confirmedPassword];
